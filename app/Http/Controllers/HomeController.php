@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\User;
 
 class HomeController extends Controller
 {
@@ -27,11 +25,12 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
     public function profile()
     {
-        $users = User::all();
-
-        dd($users->count());
-        return view('profile', ['users' => $users]);
+        $user = Auth::user();
+        $posts = $user->posts;
+        dd($posts);
+        return view('profile', ['posts' => $posts]);
     }
 }
